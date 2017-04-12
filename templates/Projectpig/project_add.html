@@ -1,0 +1,33 @@
+{% extends 'start/index.html' %}
+
+{% block  page-title %}
+    运维开发
+{% endblock %}
+
+{% block page-content %}
+
+<div class="row">
+        <div class="panel-heading">
+            <h3 class="panel-title">添加项目</h3>
+        </div>
+        <div class="panel-body " style="position:relative;z-index:2">
+            <div class="row">
+                <form method="post"> {% csrf_token %}
+                    {{ article_form }}
+                    <input type="submit" class="btn btn-success pull-right" value="确定">
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+{% endblock %}
+{% block bottom-js %}
+    <script src="/static/plugins/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript">
+        CKEDITOR.replace('work_content')
+
+    </script>
+{% endblock %}
+
