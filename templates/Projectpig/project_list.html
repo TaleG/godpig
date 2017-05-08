@@ -48,7 +48,7 @@
                     </thead>
                     <tbody>
                     {% for project in project_list %}
-                        <tr project_name="{{ project.project_name }}">
+                        <tr>
                             <td data-type="project_name"><a href="{% url 'new_article_list' %}">{{ project.project_name }}</a></td>
                             <td data-type="person_in_charge">{{ project.person_in_charge }}</td>
                             <td data-type="work_content">{{ project.work_content|truncatechars:30 }}</td>

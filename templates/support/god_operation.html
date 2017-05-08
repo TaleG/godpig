@@ -1,0 +1,51 @@
+{% extends 'start/index.html' %}
+
+{% block  page-title %}
+
+    控制台
+{% endblock %}
+
+{% block page-content %}
+
+  <div class="row">
+    <div class="col-lg-12">
+
+        <!--Network Line Chart-->
+        <!--===================================================-->
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Support</h3>
+            </div>
+
+
+
+            <!--Chart information-->
+            <div class="panel-body " style="position:relative;z-index:2">
+                <form role="form" method="post">{% csrf_token %}
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="input-group">
+                          <input type="text" class="form-control" placeholder="Search for..." name="ipnub">
+                          <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit">Go!</button>
+                          </span>
+                        </div><!-- /input-group -->
+                      </div><!-- /.col-lg-6 -->
+                    </div>
+                </form>
+                {% for ipf in ip_type%}
+                    <div class="col-lg-8">
+                        <span>{{ ipf }}<br></span>
+                    </div>
+                {% endfor %}
+
+            </div>
+        <!--===================================================-->
+        <!--End network line chart-->
+
+        </div>
+
+    </div>
+  </div>
+
+{% endblock %}

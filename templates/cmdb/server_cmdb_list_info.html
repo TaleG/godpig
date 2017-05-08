@@ -1,0 +1,153 @@
+{% extends 'start/index.html' %}
+
+{% block  page-title %}
+
+    CMDB
+{% endblock %}
+
+{% block page-content %}
+
+  <div class="row">
+    <div class="col-lg-12">
+
+        <!--Network Line Chart-->
+        <!--===================================================-->
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-control">
+                    <button id="demo-panel-network-refresh" data-toggle="panel-overlay" data-target="#demo-panel-network" class="btn"><i class="fa fa-rotate-right"></i></button>
+                </div>
+                {% for name in godcmdb_record %}
+                    <h3 class="panel-title">
+                        {{ name.asset.name }}资产信息
+                    </h3>
+                {% endfor %}
+            </div>
+
+
+
+            <!--Chart information-->
+            <div class="panel-body " style="position:relative;z-index:2">
+                <div class="row">
+                 <table id='host_status_list' class="table table-striped table-hover">
+                     {% for godcmdb_list in godcmdb_record %}
+                     <tr>
+                         <td class="text-normal">设备类型</td>
+                         <td>{{ godcmdb_list.asset_type }}</td>
+                     </tr>
+                     <tr>
+                         <td class="text-normal">设备名</td>
+                         <td>{{ godcmdb_list.asset.name }}</td>
+                     </tr>
+                     <tr>
+                         <td class="text-normal">资产SN号</td>
+                         <td>{{ godcmdb_list.asset.sn|default_if_none:"" }}</td>
+                     </tr>
+                     <tr>
+                         <td class="text-normal">生产／测试</td>
+                         <td>{{ godcmdb_list.asset.get_production_test_display }}</td>
+                     </tr>
+                     <tr>
+                         <td class="text-normal">机柜号</td>
+                         <td>{{ godcmdb_list.asset.model }}</td>
+                     </tr>
+                     <tr>
+                         <td class="text-normal">机柜位置</td>
+                         <td>{{ godcmdb_list.asset.model_position }}</td>
+                     </tr>
+                     <tr>
+                         <td class="text-normal">制造商</td>
+                         <td>{{ godcmdb_list.asset.manufactory }}</td>
+                     </tr>
+                     <tr>
+                         <td class="text-normal">管理IP</td>
+                         <td>{{ godcmdb_list.asset.management_ip }}</td>
+                     </tr>
+                     <tr>
+                         <td class="text-normal">合同</td>
+                         <td>{{ godcmdb_list.asset.contract }}</td>
+                     </tr>
+                     <tr>
+                         <td class="text-normal">购买时间</td>
+                         <td>{{ godcmdb_list.asset.trade_data }}</td>
+                     </tr>
+                     <tr>
+                         <td class="text-normal">过保修期</td>
+                         <td>{{ godcmdb_list.asset.expire_date }}</td>
+                     </tr>
+                     <tr>
+                         <td class="text-normal">所属业务</td>
+                         <td>{{ godcmdb_list.asset.business_unit.name }}</td>
+                     </tr>
+                     <tr>
+                         <td class="text-normal">管理员</td>
+                         <td>{{ godcmdb_list.asset.admin }}</td>
+                     </tr>
+                     <tr>
+                         <td class="text-normal">IDC机房</td>
+                         <td>{{ godcmdb_list.asset.idc }}</td>
+                     </tr>
+                     <tr>
+                         <td class="text-normal">添加模式</td>
+                         <td>{{ godcmdb_list.get_created_by_display }}</td>
+                     </tr>
+                     <tr>
+                         <td class="text-normal">CPU信息(核数)</td>
+                         <td>{{ godcmdb_list.cpu_info.cpu_core_count }}</td>
+                     </tr>
+                     <tr>
+                         <td class="text-normal">内存信息(G)</td>
+                         <td>{{ godcmdb_list.mem_info.capacity }}</td>
+                     </tr>
+                     <tr>
+                         <td class="text-normal">磁盘信息(G)</td>
+                         <td>{{ godcmdb_list.disk_info.capacity }}</td>
+                     </tr>
+                     <tr>
+                         <td class="text-normal">内网网卡信息(eth0)</td>
+                         <td>{{ godcmdb_list.IPS.ipaddress }}</td>
+                     </tr>
+                     <tr>
+                         <td class="text-normal">第二张网卡eth1</td>
+                         <td>{{ godcmdb_list.ips1 }}</td>
+                     </tr>
+                     <tr>
+                         <td class="text-normal">第三张网卡eth1</td>
+                         <td>{{ godcmdb_list.ips2 }}</td>
+                     </tr>
+                     <tr>
+                         <td class="text-normal">第四张网卡eth1</td>
+                         <td>{{ godcmdb_list.ips3 }}</td>
+                     </tr>
+                     <tr>
+                         <td class="text-normal">raid类型</td>
+                         <td>{{ godcmdb_list.asset.raid_type }}</td>
+                     </tr>
+                     <tr>
+                         <td class="text-normal">系统类型</td>
+                         <td>{{ godcmdb_list.os_type }}</td>
+                     </tr>
+                     <tr>
+                         <td class="text-normal">创建时间</td>
+                         <td>{{ godcmdb_list.create_date|date:'Y-m-d' }}</td>
+                     </tr>
+                     <tr>
+                         <td class="text-normal">更新时间</td>
+                         <td>{{ godcmdb_list.asset.update_date|date:'Y-m-d' }}</td>
+                     </tr>
+                     <tr>
+                         <td class="text-normal">备注</td>
+                         <td>{{ godcmdb_list.asset.memo }}</td>
+                     </tr>
+                     {% endfor %}
+                 </table>
+                </div>
+            </div>
+        <!--===================================================-->
+        <!--End network line chart-->
+
+    </div>
+
+  </div>
+
+{% endblock %}

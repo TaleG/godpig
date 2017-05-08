@@ -1,4 +1,6 @@
 {% extends 'start/index.html' %}
+<!--导入godcmdb/templatetags/custom_tags-->>
+{% load custom_tags %}
 
 {% block  page-title %}
 
@@ -14,7 +16,21 @@
         <!--===================================================-->
         <div class="panel">
             <div class="panel-heading">
+                <!--搜索框-->
+                <form role="form" method="post">{% csrf_token %}
+                    <div class="searchbox">
+                        <div class="input-group custom-search-form">
+                            <input type="text" class="form-control" placeholder="Search.." name="ipnmb">
+                            <span class="input-group-btn">
+                                <button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+
+
                 <div class="panel-control">
+
                     <button id="demo-panel-network-refresh" data-toggle="panel-overlay" data-target="#demo-panel-network" class="btn"><i class="fa fa-rotate-right"></i></button>
                     <div class="btn-group">
                         <button class="dropdown-toggle btn" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-gear"></i></button>
@@ -39,13 +55,13 @@
                     <thead>
                         <tr>
                             <td>设备类型</td>
-                            <td>生产／测试</td>
+                            <td>设备名</td>
                             <td>机柜号</td>
                             <td>所属业务</td>
                             <td>系统类型</td>
                             <td>管理IP</td>
                             <td>管理员</td>
-                            <td>IDC机房</td>
+                            <td>服务器IP</td>
                             <td>CPU信息</td>
                             <td>内存信息(G)</td>
                             <td>磁盘信息(GB)</td>
@@ -53,15 +69,15 @@
                     </thead>
                     <tbody>
                     {% for server_cmdb in server_cmdb_obj %}
-                        <tr asset_type="{{ server_cmdb.asset.asset_type }}">
-                            <td data-type="asset_type">{{ server_cmdb.asset.asset_type}}</td>
+                        <tr>
+                            <td data-type="asset_type">{{ server_cmdb.asset.get_asset_type_display}}</td>
                             <td data-type="production_test">{{ server_cmdb.asset.get_production_test_display}}</td>
                             <td data-type="model">{{ server_cmdb.asset.model}}</td>
-                            <td data-type="business_unit">{{ server_cmdb.asset.business_unit }}</td>
-                            <td data-type="os_type">{{ server_cmdb.os_type}}</td>
-                            <td data-type="management_ip">{{ server_cmdb.asset.management_ip }}</td>
-                            <td data-type="admin">{{ server_cmdb.asset.admin }}</td>
-                            <td data-type="idc">{{ server_cmdb.asset.idc }}</td>
+                            <td data-type="business_unit">{{ server_cmdb.business_unit.name }}</td>
+                            <td data-type="os_type">{{ server_cmdb.os_type.distribution }}:{{ server_cmdb.os_type}}</td>
+                            <td data-type="management_ip"><a href="{% url 'server_cmdb_list_info' %}?id={{ server_cmdb.id }}">{{ server_cmdb.asset.management_ip }}</a></td>
+                            <td data-type="admin">{{ server_cmdb.admin }}</td>
+                            <td data-type="IPS">{{ server_cmdb.IPS.ipaddress }}</td>
                             <td data-type="cpu_info">{{ server_cmdb.cpu_info.cpu_core_count }}</td>
                             <td data-type="mem_info">{{ server_cmdb.mem_info.capacity }}</td>
                             <td data-type="disk_info">{{ server_cmdb.disk_info.capacity }}</td>
@@ -74,8 +90,26 @@
         <!--===================================================-->
         <!--End network line chart-->
 
+        </div>
+
     </div>
-
   </div>
+<!--===================================================-->
+        <!--分页配置-->
+     <div class="pagination">
 
+        <nav>
+            <ul class="pagination">
+                {% if server_cmdb_obj.has_previous %}
+                    <li class=""><a href="?page={{ server_cmdb_obj.previous_page_number }}" aria-label="Previous">&laquo;</a></li>
+                {% endif %}
+                    {% for page_num in server_cmdb_obj.paginator.page_range %}
+                        {% guess_page server_cmdb_obj.number page_num %}
+                    {% endfor %}
+                {% if server_cmdb_obj.has_next %}
+                    <li class=""><a href="?page={{ server_cmdb_obj.next_page_number }}" aria-label="Next">&raquo;</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
 {% endblock %}

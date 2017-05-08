@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^triggers/$',views.triggers,name='triggers' ),
     url(r'^admin/', admin.site.urls),
     url(r'^login/', views.acc_login,name='login'),
+    url(r'^accounts/login/', views.acc_login,name='login'),
     url(r'^logout/', views.acc_logout,name='logout'),
     # url(r'^customers/$',views.customers),
 ]

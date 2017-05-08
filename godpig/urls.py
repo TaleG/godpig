@@ -20,6 +20,7 @@ urlpatterns = [
     url(r'^', include('godbody.urls')),
     url(r'^projectpig/', include('projectpig.urls')),
     url(r'^godcmdb/', include('godcmdb.urls')),
+    url(r'^godsupport/', include('godsupport.urls')),
     url(r'^admin/', admin.site.urls),
     # url(r'^customers/$',views.customers),
 ]

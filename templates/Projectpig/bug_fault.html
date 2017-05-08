@@ -51,7 +51,7 @@
                     </thead>
                     <tbody>
                     {% for bug_fault in bug_fault_obj %}
-                        <tr bug_code="{{ bug_fault.bug_code }}">
+                        <tr>
                             <td data-type="bug_code">{{ bug_fault.bug_code}}</td>
                             <td data-type="bug_name">{{ bug_fault.bug_name}}</td>
                             <td data-type="bug_version">{{ bug_fault.bug_version|truncatechars:10}}</td>

@@ -50,7 +50,7 @@
                     </thead>
                     <tbody>
                     {% for god_fault in god_fault_obj %}
-                        <tr god_bug_type="{{ god_fault.god_bug_type }}">
+                        <tr>
                             <td data-type="god_bug_date"><a href="#">{{ god_fault.god_bug_date|date:'Y-m-d h:m:s' }}</a></td>
                             <td data-type="god_bug_type">{{ god_fault.get_god_bug_type_display }}</td>
                             <td data-type="god_bug_ip">{{ god_fault.god_bug_ip }}</td>

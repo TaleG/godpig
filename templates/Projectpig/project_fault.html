@@ -48,7 +48,7 @@
                     </thead>
                     <tbody>
                     {% for god_fault in project_fault_obj %}
-                        <tr article="{{ god_fault.article }}">
+                        <tr>
                             <td data-type="article"><a href="#">{{ god_fault.article|truncatechars:10 }}</a></td>
                             <td data-type="project_track">{{ god_fault.project_track}}</td>
                             <td data-type="end_type">{{ god_fault.get_end_type_display}}</td>

@@ -178,6 +178,12 @@
                                             </li>
                                             <li>
                                                 <a href="#">
+                                                    <span class="label label-danger pull-right">New</span>
+                                                    <i class="fa fa-android fa-fw fa-lg"></i> 签到
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
                                                     <span class="badge badge-danger pull-right">0</span>
                                                     <i class="fa fa-envelope fa-fw fa-lg"></i> Messages
                                                 </a>
@@ -241,6 +247,8 @@
 					<h2 class="page-header text-overflow">{% block page-title %}your page title{% endblock %}</h2>
 
 					<!--Searchbox-->
+                <!--搜索框-->
+                <!--
 					<div class="searchbox">
 						<div class="input-group custom-search-form">
 							<input type="text" class="form-control" placeholder="Search..">
@@ -249,6 +257,7 @@
 							</span>
 						</div>
 					</div>
+				-->
 				</div>
 				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 				<!--End page title-->
@@ -507,7 +516,9 @@
 									<li class="">
 										<a href="{% url 'dashboard' %}">
 											<i class="fa fa-plane"></i>
-											<span class="menu-title">监控大盘</span>
+											<span class="menu-title">
+                                                <strong>监控大盘</strong>
+                                            </span>
 										</a>
 									</li>
 
@@ -538,10 +549,16 @@
 										<a href="#">
 											<i class="fa fa-sitemap"></i>
 											<span class="menu-title">
-												<strong>拓扑图</strong>
+												<strong>控制台</strong>
 												<span class="pull-right badge badge-purple">0</span>
 											</span>
 										</a>
+                                        <ul class="collapse">
+											<li><a href="{% url 'god_operation' %}">support</a></li>
+											<li class="list-divider"></li>
+											<li><a href="#">kingwl</a></li>
+
+										</ul>
 									</li>
 									<!--Menu list item-->
 									<li>
@@ -577,7 +594,7 @@
 									</li>
                                     <li>
 										<a href="#">
-											<i class="fa fa-cogs"></i>
+											<i class="fa fa-anchor"></i>
 											<span class="menu-title">
 												<strong>故障登记</strong>
 											</span>
@@ -595,7 +612,7 @@
 									</li>
                                     <li>
 										<a href="">
-											<i class="fa fa-cogs"></i>
+											<i class="fa fa-align-center"></i>
 											<span class="menu-title">
 												<strong>CMDB</strong>
 											</span>
@@ -605,6 +622,7 @@
 										<!--Submenu-->
 										<ul class="collapse">
 											<li><a href="{% url 'server_cmdb_list' %}">服务器</a></li>
+                                            <li><a href="{% url 'asset_cmdb_list' %}">物理机</a></li>
 											<li><a href="#">交换机</a></li>
 											<li><a href="#">路由器</a></li>
                                             <li><a href="#">存储</a></li>
